@@ -5,8 +5,7 @@ const requestJson = require('./apiLogic');
 function homePage(req, res) {
   fs.readFile(path.join(__dirname, '..', 'public', 'html', 'index.html'), (err, file) => {
     if (err) {
-      // errorServer(req, res);
-      // throw Error('Wrong with reading the files in homePage');
+      errorServer(req, res);
     }
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(file);
@@ -55,7 +54,7 @@ function topStories(req, res) {
   requestJson(1, (err, arr) => {
     if (err) {
       res.writeHead(500, { 'Content-Type': 'application/json' });
-      res.end(err);
+      res.end(JSON.stringify(err));
     }
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(arr));
