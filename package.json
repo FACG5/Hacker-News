@@ -2,12 +2,13 @@
   "name": "Hacker-News",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "node test/test.js | tap-spec"
+    "test": "node test/test.js | tap-spec",
+    "start":"node src/server"
   },
   "repository": {
     "type": "git",
