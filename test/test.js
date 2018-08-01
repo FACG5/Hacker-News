@@ -13,7 +13,6 @@ test('this is test about something', (t) => {
     });
 });
 
-/*
 test('test topStories', (t) => {
   superTest(router)
     .get('/topStories')
@@ -46,4 +45,3 @@ test('test bestStories', (t) => {
       t.end();
     });
 });
-*/
