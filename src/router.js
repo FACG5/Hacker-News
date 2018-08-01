@@ -1,22 +1,17 @@
-const {
-  homePage, serverStaticFile, errorPage, topStories, newStories, bestStories,
-} = require('./handler');
+const handler = require('./handler');
 
-const router = (req, res) => {
+function router(req, res) {
   const endpoint = req.url;
+  res.writeHead(200, { 'content-Type': 'text/html' });
   if (endpoint === '/') {
-    homePage(req, res);
+    handler.homePage(req, res);
   } else if (endpoint.includes('public')) {
-    serverStaticFile(req, res);
-  } else if (endpoint === '/topStories') {
-    topStories(req, res);
+    handler.serverStaticFile(req, res);
   } else if (endpoint === '/newStories') {
-    newStories(req, res);
+    handler.newStories(req, res);
+  } else if (endpoint === '/topStories') {
+    handler.topStories(req, res);
   } else if (endpoint === '/bestStories') {
-    bestStories(req, res);
-  } else {
-    errorPage(req, res);
+    handler.bestStories(req, res);
   }
-};
-
-module.exports = router;
+}module.exports = router;
