@@ -1,7 +1,7 @@
 # Hacker-News 
 
 ## What?
-a website give you the latest top , new and best technical news in alist form and you can git more information when you click on the title of every news on the page and hope for you iteresting reading :)
+a website give you the latest top , new and best technical news in alist form and you can git more information when you click on the title of every news on the page and hope for you interesting reading :)
 
 ## How?
 
