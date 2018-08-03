@@ -2,7 +2,6 @@ const handler = require('./handler');
 
 function router(req, res) {
   const endpoint = req.url;
-  res.writeHead(200, { 'content-Type': 'text/html' });
   if (endpoint === '/') {
     handler.homePage(req, res);
   } else if (endpoint.includes('public')) {
@@ -14,4 +13,6 @@ function router(req, res) {
   } else if (endpoint === '/bestStories') {
     handler.bestStories(req, res);
   }
-}module.exports = router;
+}
+
+module.exports = router;
