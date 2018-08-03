@@ -17,13 +17,14 @@ test('test topStories', (t) => {
   superTest(router)
     .get('/topStories')
     .expect(200)
-    .responseType('application/json')
-    .end((err) => {
+    
+    .end((err,res) => {
+      console.log(res);
       t.error(err);
       t.end();
     });
 });
-
+/*
 test('test newStories', (t) => {
   superTest(router)
     .get('/newStories')
@@ -45,3 +46,4 @@ test('test bestStories', (t) => {
       t.end();
     });
 });
+*/

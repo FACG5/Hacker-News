@@ -15,7 +15,7 @@ function requestApi(type, cb) {
         if (error) {
           cb(error);
         }
-        arrayOfItem.push(bodyItem);
+        arrayOfItem.push(JSON.parse(bodyItem));
         if (arrayOfItem.length === 10) {
           cb(null, arrayOfItem);
         }

@@ -1,41 +1,61 @@
-document.getElementById('new').addEventListener('click', (event) => {
-  feachApi(null, 'GET', '/newStories', render);
-});
 
-document.getElementById('top').addEventListener('click', (event) => {
-  feachApi(null, 'GET', '/topStories', render);
-});
+function domainfromurl(url) {
+  const regexurl = /(https?:\/\/)*(www\.)*(\w+)(\.\w+)?/;
+  const matchArray = url.match(regexurl);
+  return matchArray[3] + (matchArray[4] || '');
+}
 
-document.getElementById('best').addEventListener('click', (event) => {
-  feachApi(null, 'GET', '/bestStories', render);
-});
-
-function render(arr) {
-  let main = document.getElementById("main");
+function render(arr, state) {
+  const main = document.getElementById('main');
   main.textContent = '';
-  arr.forEach(element => {
-    ele = JSON.parse(element);
-    let item = document.createElement('div');
-    item.classList.add("item");
-  
-    let aDiv = document.createElement('div');
-    let a = document.createElement('a');
-    a.textContent = ele.title
-    a.href = ele.url;
-    aDiv.appendChild(a);
+  if (state) {
+    const loadingImg = document.createElement('img');
+    loadingImg.src = 'https://zippy.gfycat.com/SkinnySeveralAsianlion.gif';
+    loadingImg.id = 'loadingImg';
+    main.appendChild(loadingImg);
+    return;
+  }
+  arr.filter(Boolean).forEach((element) => {
+    const item = document.createElement('div');
+    item.classList.add('item');
 
-    let bDiv = document.createElement('div');
-    let point = document.createElement('span');
-    point.textContent = ele.score +" points";
+    const titleDiv = document.createElement('div');
+    const a = document.createElement('a');
 
-    let by = document.createElement('span');
-    by.textContent = " by " + ele.by;
+    a.textContent = element.title;
+    a.href = element.url;
+    a.classList.add('title');
+    titleDiv.appendChild(a);
 
-    bDiv.appendChild(point);
-    bDiv.appendChild(by);
+    if (element.url) {
+      const hostName = document.createElement('span');
+      hostName.textContent = `  (${domainfromurl(element.url)})`;
+      hostName.classList.add('hostName');
+      titleDiv.appendChild(hostName);
+    }
+    const detailDiv = document.createElement('div');
+    const point = document.createElement('span');
+    point.textContent = `${element.score} points`;
+    point.classList.add('point');
 
-    item.appendChild(aDiv);
-    item.appendChild(bDiv);
+    const name = document.createElement('span');
+    name.textContent = ` by ${element.by}`;
+    name.classList.add('name');
+
+    detailDiv.appendChild(point);
+    detailDiv.appendChild(name);
+
+    item.appendChild(titleDiv);
+    item.appendChild(detailDiv);
     main.appendChild(item);
   });
 }
+
+window.onload = feachApi(null, 'GET', '/newStories', render);
+
+Array.from(document.getElementsByClassName('news'))
+  .forEach((element) => {
+    element.addEventListener('click', () => {
+      feachApi(null, 'GET', element.id, render);
+    });
+  });
